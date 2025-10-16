@@ -1,0 +1,14 @@
+# Zero-Shot Image Enhancement Pipeline Requirements
+# Install with: pip install -r requirements.txt
+
+# Core dependencies
+opencv-contrib-python>=4.5.0
+numpy>=1.19.0
+scipy>=1.7.0
+scikit-image>=0.18.0
+tqdm>=4.60.0
+pathlib2>=2.3.0
+
+# Optional but recommended
+matplotlib>=3.3.0  # For visualization
+Pillow>=8.0.0      # Additional image format support
