@@ -1,20 +1,22 @@
-# 🚀 Quick Start Guide
+# Quick Start Guide
 
 <div align="center">
 
 **Intrinsic Images in the Wild - Zero-Shot Enhancement Pipeline**
 
-[📖 Main Documentation](../README.md) • [📊 Dataset](http://intrinsic.cs.cornell.edu/)
+[Main Documentation](README.md) • [Comprehensive Guide](README_COMPREHENSIVE.md)
 
 </div>
 
 ---
 
-## 🎯 Overview
+## Overview
 
 This guide will help you get started with the **Intrinsic Images in the Wild** decomposition pipeline and the **Zero-Shot Enhancement** system for processing images into reflectance and shading components.
 
-## ⚡ One-Time Setup
+**Dataset**: The results shown in this repository were obtained using the **MVTV (Multi-View Television) dataset**, demonstrating the effectiveness of the pipeline on real-world low-light video frames.
+
+## One-Time Setup
 
 ### Prerequisites
 - **Ubuntu/Debian** system recommended
@@ -34,17 +36,18 @@ chmod +x setup.sh
 ./setup.sh
 
 # 3. Verify installation
-python -c "import bell2014; print('✓ Core algorithm ready')"
-python -c "import torch; print('✓ Enhancement pipeline ready')"
+python -c "import numpy; import scipy; print('Core algorithm ready')"
+conda activate enhancement_env
+python -c "import cv2; import cv2.ximgproc; print('Enhancement pipeline ready')"
 ```
 
 **What the setup script does:**
 - Installs system dependencies (Eigen3, OpenCV)
 - Creates conda environments (`intrinsic_env`, `enhancement_env`)
 - Installs Python packages and compiles C++ extensions
-- Downloads sample data and test images
+- Verifies the installation
 
-## 🖼️ Processing Images
+## Processing Images
 
 ### Option 1: Batch Processing (Recommended)
 
@@ -87,20 +90,7 @@ python enhancing_script.py \
     --contrast 1.2
 ```
 
-## 📊 View Results
-
-### Interactive Analysis
-
-```bash
-# Launch the analysis dashboard
-python demo_simple.py
-
-# View specific image results
-python demo_simple.py --samples
-
-# Generate comparison report
-python demo_simple.py --report
-```
+## View Results
 
 ### Output Structure
 
@@ -108,22 +98,23 @@ The pipeline generates several output directories:
 
 | Directory | Purpose | Contents |
 |-----------|---------|----------|
-| `msr_enhanced/` | **Best results** ⭐ | MSR-enhanced final images |
+| `msr_enhanced/` | **Best results** | MSR-enhanced final images |
 | `shading_reflectance/` | Decomposition | `-r.png` (reflectance), `-s.png` (shading) |
 | `enhanced/` | Structure-aware | Enhanced with structure preservation |
 | `reconstructed/` | Simple reconstruction | Basic reflectance × shading |
+| `gamma_enhanced/` | Gamma correction | Gamma-corrected images |
+| `clahe_enhanced/` | CLAHE | Contrast-limited adaptive histogram equalization |
 
-## 🎛️ Quick Commands Reference
+## Quick Commands Reference
 
 | Command | Environment | Purpose |
 |---------|-------------|---------|
 | `./setup.sh` | Any | Complete installation |
-| `python demo_simple.py` | enhancement_env | View pipeline analysis |
 | `conda activate intrinsic_env` | Any | Switch to decomposition environment |
 | `conda activate enhancement_env` | Any | Switch to enhancement environment |
 | `./multi_images.sh <input> <output> <components> <threads>` | intrinsic_env | Batch processing |
 
-## ⚙️ Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -139,15 +130,15 @@ export OMP_NUM_THREADS=8  # For parallel processing
 ### Custom Parameters
 
 Edit configuration files to customize:
-- **`decomposition/params.json`** - Algorithm parameters
-- **`enhancing_script.py`** - Enhancement settings
-- **`multi_images.sh`** - Batch processing options
+- **`bell2014/params.json`** - Algorithm parameters (if exists)
+- **`enhancing_script.py`** - Enhancement settings (via command-line arguments)
+- **`bell2014/multi_images.sh`** - Batch processing options
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
-**❌ Python versions conflict**
+**Python versions conflict**
 ```bash
 # Decomposition needs Python 2.7
 conda create -n intrinsic_env python=2.7
@@ -155,14 +146,14 @@ conda create -n intrinsic_env python=2.7
 conda create -n enhancement_env python=3.9
 ```
 
-**❌ OpenCV installation issues**
+**OpenCV installation issues**
 ```bash
 pip install opencv-contrib-python==4.5.5.64
 # Or for Python 2.7 compatibility:
 pip install opencv-python==4.2.0.34
 ```
 
-**❌ Eigen3 not found**
+**Eigen3 not found**
 ```bash
 # Ubuntu/Debian
 sudo apt-get install libeigen3-dev
@@ -174,7 +165,7 @@ sudo yum install eigen3-devel
 brew install eigen
 ```
 
-**❌ Terminal app error in batch script**
+**Terminal app error in batch script**
 ```bash
 # Edit multi_images.sh and change TERMINAL_APP variable
 TERMINAL_APP="gnome-terminal"  # or your preferred terminal
@@ -182,58 +173,21 @@ TERMINAL_APP="gnome-terminal"  # or your preferred terminal
 
 ### Performance Tips
 
-- **Use SSD storage** for large image datasets
-- **Increase parallel processes** for multi-core systems
-- **Batch similar sized images** for optimal memory usage
-- **Clean output directories** before large batch runs
+- Use SSD storage for large image datasets
+- Increase parallel processes for multi-core systems
+- Batch similar sized images for optimal memory usage
+- Clean output directories before large batch runs
 
-## 📈 Benchmark Results
+## Resources & Documentation
 
-| Dataset Size | Processing Time | Memory Usage | Output Quality |
-|-------------|----------------|--------------|----------------|
-| 100 images | ~5 minutes | ~2GB | High |
-| 1000 images | ~45 minutes | ~4GB | High |
-| 10k images | ~6 hours | ~8GB | High |
-
-## 🎓 Advanced Usage
-
-### Custom Enhancement Models
-
-```python
-from enhancing_script import EnhancementPipeline
-
-# Initialize with custom settings
-pipeline = EnhancementPipeline(
-    brightness_factor=1.5,
-    contrast_factor=1.2,
-    structure_preservation=True
-)
-
-# Process single image
-result = pipeline.process_image('input.png')
-```
-
-### Integration with Other Tools
-
-```python
-# Export results for other applications
-pipeline.export_to_photoshop('results.psd')
-pipeline.export_to_blender('scene.blend')
-```
-
-## 📚 Resources & Documentation
-
-- **[📖 Comprehensive Documentation](README_COMPREHENSIVE.md)** - Detailed technical guide
-- **[🎓 Research Paper](http://intrinsic.cs.cornell.edu)** - Original SIGGRAPH 2014 paper
-- **[📊 Dataset](http://intrinsic.cs.cornell.edu/)** - Intrinsic Images in the Wild benchmark
-- **[💬 Issues](https://github.com/your-repo/issues)** - Report bugs or request features
+- **[Comprehensive Documentation](README_COMPREHENSIVE.md)** - Detailed technical guide
+- **[Research Paper](http://intrinsic.cs.cornell.edu)** - Original SIGGRAPH 2014 paper
+- **[Intrinsic Images Dataset](http://intrinsic.cs.cornell.edu/)** - Intrinsic Images in the Wild benchmark
 
 ---
 
 <div align="center">
 
-**Ready to start processing images?** 🚀
-
-Run `python demo_simple.py` to see the pipeline in action!
+For detailed usage examples and advanced configuration, see [README_COMPREHENSIVE.md](README_COMPREHENSIVE.md)
 
 </div>
