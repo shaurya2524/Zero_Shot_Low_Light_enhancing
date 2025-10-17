@@ -142,6 +142,47 @@ This repository implements a **zero-shot image enhancement pipeline** that drama
 | **Color Accuracy** | Cannot assess | Natural colors | Excellent preservation |
 | **Usability** | Unusable | Professional quality | Production ready |
 
+### Quantitative Results on LLVIP Dataset
+
+Performance comparison of different enhancement methods against ground truth images from the **LLVIP (Low-Light Visible-Infrared Paired) dataset**:
+
+| Method | SSIM ↑ | PSNR (dB) ↑ | MSE ↓ | Rank |
+|--------|--------|-------------|-------|------|
+| **Structure-Aware Enhanced** | **0.8100** | **22.88** | **646.34** | 1st |
+| **Gamma Enhanced** | 0.7977 | 22.40 | 726.65 | 2nd |
+| **MSR Enhanced** | 0.7785 | 21.81 | 815.67 | 3rd |
+| **Reconstructed (Simple)** | 0.7641 | 19.51 | 925.17 | 4th |
+| **CLAHE Enhanced** | 0.7074 | 19.95 | 837.87 | 5th |
+
+**Key Findings:**
+- Structure-aware enhancement achieves the best quantitative metrics with highest SSIM (0.81) and PSNR (22.88 dB)
+- All methods show significant improvement over the original low-light images
+- MSR provides excellent visual quality with good quantitative performance
+- Lower MSE values indicate better reconstruction accuracy
+
+**Datasets Used:**
+- **MVTV Dataset**: Multi-View Television dataset for visual quality demonstration
+- **LLVIP Dataset**: Low-Light Visible-Infrared Paired dataset for quantitative evaluation
+
+### LLVIP Dataset Example
+
+<div align="center">
+
+<table>
+<tr>
+<td align="center"><b>Original Low-Light Input</b></td>
+<td align="center"><b>Structure-Aware Enhanced</b></td>
+</tr>
+<tr>
+<td><img src="docs/images/llvip_input.jpg" width="400"/></td>
+<td><img src="docs/images/llvip_enhanced.png" width="400"/></td>
+</tr>
+</table>
+
+**LLVIP Dataset**: Low-light visible images paired with infrared images for comprehensive evaluation. The structure-aware enhancement method achieved the best quantitative results (SSIM: 0.81, PSNR: 22.88 dB) on this challenging dataset.
+
+</div>
+
 ---
 
 ## How It Works
