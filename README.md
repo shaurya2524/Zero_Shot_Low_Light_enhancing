@@ -144,7 +144,7 @@ This repository implements a **zero-shot image enhancement pipeline** that drama
 
 ### Quantitative Results on LLVIP Dataset
 
-Performance comparison of different enhancement methods against ground truth images from the **LLVIP (Low-Light Visible-Infrared Paired) dataset**:
+Performance comparison of different enhancement methods against ground truth images from the **LLVIP (Low-Light Visible-Infrared Paired) dataset** (evaluated on 358 images):
 
 | Method | SSIM ↑ | PSNR (dB) ↑ | MSE ↓ | Rank |
 |--------|--------|-------------|-------|------|
