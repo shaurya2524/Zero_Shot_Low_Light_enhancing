@@ -8,7 +8,7 @@
 
 **Advanced Low-Light Image Enhancement using Intrinsic Image Decomposition**
 
-A state-of-the-art pipeline combining intrinsic image decomposition with Multi-Scale Retinex enhancement for superior low-light image recovery.
+A pipeline combining intrinsic image decomposition with Multi-Scale Retinex enhancement and Structure Aware shading enhancement for superior low-light image recovery.
 
 [Quick Start](#quick-start) • [Installation](#installation) • [Visual Results](#visual-results) • [Full Documentation](README_COMPREHENSIVE.md)
 
@@ -34,11 +34,11 @@ A state-of-the-art pipeline combining intrinsic image decomposition with Multi-S
 
 ## Overview
 
-This repository implements a **zero-shot image enhancement pipeline** that dramatically improves the visibility and quality of low-light images without requiring any training data. The system leverages intrinsic image decomposition to separate reflectance (material properties) from shading (illumination), then applies advanced enhancement algorithms to recover details lost in dark regions.
+This repository implements a **zero-shot image enhancement pipeline** that  improves the visibility and quality of low-light images without requiring any training data. The system leverages intrinsic image decomposition to separate reflectance (color properties) from shading (illumination), then applies **Structure-Aware Enhancement** and **Multi-Scale Retinex (MSR)** enhancement algorithms to recover details lost in dark regions essentially only enhancing the shading part keeping color properties intact.
 
-**Core Technology**: Based on the SIGGRAPH 2014 paper "Intrinsic Images in the Wild" by Sean Bell, Kavita Bala, and Noah Snavely, extended with multiple enhancement methods including **Multi-Scale Retinex (MSR)** for state-of-the-art low-light enhancement.
+**Core Technology**: Based on the SIGGRAPH 2014 paper "Intrinsic Images in the Wild" by Sean Bell, Kavita Bala, and Noah Snavely, extended with multiple enhancement methods including **Multi-Scale Retinex (MSR)** and **Structure-Aware Enhancement** for low-light enhancement.
 
-**Recommended Methods**: Based on extensive evaluation across multiple datasets (MVTV, LLVIP), **Structure-Aware Enhancement** and **MSR Enhancement** consistently deliver the best results in most cases, with Structure-Aware achieving the highest quantitative metrics (SSIM: 0.81, PSNR: 22.88 dB) and MSR providing excellent visual quality with natural color preservation.
+**Recommended Methods**: Based on  evaluation across multiple datasets (MVTV, LLVIP), **Structure-Aware Enhancement** and **MSR Enhancement** consistently delivered the best results in most cases, with Structure-Aware achieving the highest quantitative metrics (SSIM: 0.81, PSNR: 22.88 dB) and MSR providing excellent visual quality with natural color preservation.
 
 ### What Makes This Special?
 
@@ -58,14 +58,8 @@ This repository implements a **zero-shot image enhancement pipeline** that drama
 - Structure-aware enhancement with edge-preserving filters
 - Gamma correction, CLAHE, and simple reconstruction methods
 - Parallel batch processing for multiple images
-- Natural color preservation during enhancement
+- color preservation during enhancement
 
-**Technical Highlights**
-- Dense CRF refinement for improved decomposition quality
-- Automatic brightness and contrast adjustment
-- Edge-preserving filters to maintain image structure
-- Robust to varying lighting conditions
-- Minimal artifacts and noise amplification
 
 ---
 
@@ -92,7 +86,7 @@ This repository implements a **zero-shot image enhancement pipeline** that drama
 
 </div>
 
-### Example 2: Indoor Scene Enhancement
+### Example 2: Outdoor Scene Enhancement
 
 <div align="center">
 
@@ -134,14 +128,7 @@ This repository implements a **zero-shot image enhancement pipeline** that drama
 
 </div>
 
-### Key Improvements
 
-| Metric | Original | Enhanced | Improvement |
-|--------|----------|----------|-------------|
-| **Visible Details** | ~5% | ~90% | 18x increase |
-| **Dynamic Range** | ~10% | ~80% | 8x expansion |
-| **Color Accuracy** | Cannot assess | Natural colors | Excellent preservation |
-| **Usability** | Unusable | Professional quality | Production ready |
 
 ### Quantitative Results on LLVIP Dataset
 
@@ -158,7 +145,6 @@ Performance comparison of different enhancement methods against ground truth ima
 **Key Findings:**
 - Structure-aware enhancement achieves the best quantitative metrics with highest SSIM (0.81) and PSNR (22.88 dB)
 - All methods show significant improvement over the original low-light images
-- MSR provides excellent visual quality with good quantitative performance
 - Lower MSE values indicate better reconstruction accuracy
 
 **Datasets Used:**
@@ -199,7 +185,7 @@ I(x,y) = R(x,y) × S(x,y)
 ```
 
 Where:
-- **R(x,y)** = Reflectance (material color, texture, albedo)
+- **R(x,y)** = Reflectance ( color, texture, albedo)
 - **S(x,y)** = Shading (illumination, shadows, lighting effects)
 
 This separation uses:
@@ -231,10 +217,10 @@ MSR(x,y) = Σᵢ wᵢ [log(S(x,y)) - log(Gσᵢ * S(x,y))]
 The enhanced shading is recombined with the original reflectance:
 
 ```
-I_enhanced(x,y) = R(x,y) × S_enhanced(x,y) × brightness_factor
+I_enhanced(x,y) = R(x,y) × S_enhanced(x,y) × brightness_factor(change it as per your need)
 ```
 
-This preserves original material colors while dramatically improving visibility.
+This preserves original material colors while  improving visibility.
 
 ---
 
@@ -253,7 +239,7 @@ The easiest way to get started:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/Zero_Shot_Enhancement.git
+git clone https://github.com/shaurya2524/Zero_Shot_Low_Light_enhancing.git
 cd Zero_Shot_Enhancement
 
 # Run automated setup
@@ -386,7 +372,7 @@ The pipeline provides five different enhancement methods:
 
 **Best for**: Low-light enhancement, color preservation, general use
 
-State-of-the-art method that simulates the human visual system's ability to perceive constant colors under varying illumination.
+The method that simulates the human visual system's ability to perceive constant colors under varying illumination.
 
 **Parameters**:
 ```bash
@@ -457,7 +443,7 @@ Fine-tune the enhancement for your specific use case:
 python enhancing_script.py \
     --input_dir shading_reflectance/ \
     --output_dir custom_results/ \
-    --brightness 12.0 \
+    --brightness 8.0 \
     --msr_sigmas "10,50,200" \
     --gamma 1.8 \
     --lambda 8000.0 \
@@ -468,7 +454,7 @@ python enhancing_script.py \
 
 | Parameter | Effect | Recommended Range | Default |
 |-----------|--------|-------------------|---------|
-| `--brightness` | Overall brightness multiplier | 5.0 - 15.0 | 9.0 |
+| `--brightness` | Overall brightness multiplier | 1.0 - 15.0 | 8.0 |
 | `--msr_sigmas` | MSR scale factors | "10,50,200" to "20,100,300" | "15,80,250" |
 | `--gamma` | Structure-aware gamma | 1.2 - 2.0 | 1.5 |
 | `--lambda` | Edge-preserving strength | 3000.0 - 10000.0 | 6000.0 |
