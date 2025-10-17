@@ -533,28 +533,6 @@ Zero_Shot_Enhancement/
     └── images/                  # README images
 ```
 
----
-
-## Performance
-
-### Processing Speed
-
-| Image Size | Decomposition | Enhancement | Total Time |
-|------------|--------------|-------------|------------|
-| 640x480 | ~2-3 seconds | ~0.5 seconds | ~3 seconds |
-| 1280x720 | ~5-7 seconds | ~1 second | ~7 seconds |
-| 1920x1080 | ~10-15 seconds | ~2 seconds | ~15 seconds |
-
-*Tested on Intel i7-9700K, 16GB RAM*
-
-### Optimization Tips
-
-1. **Parallel Processing**: Use batch processing with multiple cores
-2. **Image Size**: Resize very large images before processing
-3. **Memory**: Monitor RAM usage for large batches
-4. **Storage**: Use SSD for faster I/O operations
-
----
 
 ## Troubleshooting
 
@@ -586,50 +564,3 @@ brew install eigen
 
 For more troubleshooting help, see [README_COMPREHENSIVE.md](README_COMPREHENSIVE.md) or [QUICK_START.md](QUICK_START.md).
 
----
-
-## Citation
-
-If you use this code in your research, please cite the original paper:
-
-```bibtex
-@article{bell2014intrinsic,
-  title={Intrinsic images in the wild},
-  author={Bell, Sean and Bala, Kavita and Snavely, Noah},
-  journal={ACM Transactions on Graphics (TOG)},
-  volume={33},
-  number={4},
-  pages={1--12},
-  year={2014},
-  publisher={ACM}
-}
-```
-
----
-
-## License
-
-This project is licensed under the BSD 3-Clause License - see the [LICENSE](LICENSE) file for details.
-
-The intrinsic image decomposition code is based on the original implementation by Sean Bell, Kavita Bala, and Noah Snavely from Cornell University.
-
----
-
-## Additional Resources
-
-- **[Quick Start Guide](QUICK_START.md)** - Step-by-step tutorial for beginners
-- **[Comprehensive Documentation](README_COMPREHENSIVE.md)** - Detailed technical documentation
-- **[Original Paper](http://intrinsic.cs.cornell.edu)** - SIGGRAPH 2014 publication
-- **[Dataset](http://intrinsic.cs.cornell.edu/)** - Intrinsic Images in the Wild benchmark
-
----
-
-<div align="center">
-
-**Star this repository if you find it useful!**
-
-**Questions?** Open an issue or check the documentation.
-
-Made with dedication for the computer vision community.
-
-</div>
