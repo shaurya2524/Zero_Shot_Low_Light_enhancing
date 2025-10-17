@@ -6,7 +6,7 @@
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![Paper for intrinsic](https://img.shields.io/badge/paper-SIGGRAPH%202014-red.svg)](http://intrinsic.cs.cornell.edu)
 
-**Advanced Low-Light Image Enhancement using Intrinsic Image Decomposition**
+** Low-Light Image Enhancement using Intrinsic Image Decomposition**
 
 A pipeline combining intrinsic image decomposition with Multi-Scale Retinex enhancement and Structure Aware shading enhancement for superior low-light image recovery.
 
