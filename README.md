@@ -4,8 +4,7 @@
 
 [![Python 2.7](https://img.shields.io/badge/python-2.7-blue.svg)](https://www.python.org/downloads/release/python-270/)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![License](https://img.shields.io/badge/license-BSD--3--Clause-green.svg)](LICENSE)
-[![Paper](https://img.shields.io/badge/paper-SIGGRAPH%202014-red.svg)](http://intrinsic.cs.cornell.edu)
+[![Paper for intrinsic](https://img.shields.io/badge/paper-SIGGRAPH%202014-red.svg)](http://intrinsic.cs.cornell.edu)
 
 **Advanced Low-Light Image Enhancement using Intrinsic Image Decomposition**
 
