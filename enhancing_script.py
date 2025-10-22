@@ -11,9 +11,6 @@ Methods available:
 - Gamma correction enhancement
 - CLAHE (Contrast Limited Adaptive Histogram Equalization)
 - Simple reconstruction
-
-Author: Enhanced by Cascade AI
-Date: 2024
 """
 
 import cv2
